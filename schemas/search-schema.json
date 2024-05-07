@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Search",
+  "type": "object",
+  "required": ["search"],
+  "properties": {
+    "search": {
+      "type": "string",
+      "description": "Text to filter",
+      "default": ""
+    }
+  }
+}

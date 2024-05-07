@@ -1,0 +1,21 @@
+{
+  "name": "indra-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless": "^3.21.0",
+    "serverless-offline": "^11.3.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1615.0",
+    "axios": "^1.6.8",
+    "serverless-dynamodb-local": "^0.2.40"
+  }
+}

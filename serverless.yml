@@ -1,0 +1,39 @@
+service: indra-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: 'dynamodb:*'
+          Resource: arn:aws:dynamodb:us-east-1:471893938953:table/indraTable
+
+functions:
+  search:
+    handler: functions/search/handler.search
+    package:
+      patterns:
+        - 'functions/search/handler.js'
+    events:
+      - http:
+          path: search
+          method: GET
+          cors: true
+
+resources:
+  Resources:
+    indraTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: indraTable
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
