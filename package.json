@@ -16,6 +16,7 @@
   "dependencies": {
     "aws-sdk": "^2.1615.0",
     "axios": "^1.6.8",
+    "jest": "^29.7.0",
     "serverless-dynamodb-local": "^0.2.40"
   }
 }

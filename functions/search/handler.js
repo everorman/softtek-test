@@ -1,4 +1,4 @@
-
+'use strict';
 const axios = require('axios');
 const search = async (event, context) => {
   const { search } = event.queryStringParameters;
