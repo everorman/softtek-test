@@ -15,7 +15,6 @@ const dynamodb = new aws.DynamoDB.DocumentClient(config);
 
 const get = async (event) => {
   let personId = event.pathParameters.id;
-  console.log('personId', personId);
   const params = {
     TableName: 'indraTable',
     Key: {
@@ -26,7 +25,7 @@ const get = async (event) => {
   const res = await dynamodb.get(params).promise();
   return {
     "statusCode": 200,
-    "data": JSON.stringify(res.Item)
+    "body": JSON.stringify({ data: res.Item })
   };
 };
 

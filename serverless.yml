@@ -34,6 +34,7 @@ functions:
           request:
             schemas:
               application/json: ${file(schemas/personSchema.json)}
+          cors: true
   getPerson:
     handler: functions/get/handler.get
     events:
@@ -44,6 +45,7 @@ functions:
             parameters:
               paths:
                 id: true
+          cors: true
 resources:
   Resources:
     indraTable:

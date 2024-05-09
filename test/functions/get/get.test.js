@@ -23,11 +23,11 @@ describe('Get function', () => {
     const { data } = await save(eventToSave);
 
     const event = {
-      pathParameters: { id: data.pk }
+      pathParameters: { id: JSON.parse(data).pk }
     };
 
     const { data: person } = await get(event);
-    expect(JSON.parse(person).pk).toBe(data.pk);
+    expect(JSON.parse(person).pk).toBe(JSON.parse(data).pk);
 
   });
 });

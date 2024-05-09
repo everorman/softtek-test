@@ -27,7 +27,7 @@ const save = async (event, context) => {
   }
   return {
     "statusCode": 200,
-    "data": body
+    "body": JSON.stringify({ data: body })
   };
 };
 
