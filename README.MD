@@ -34,6 +34,12 @@ npm run test:coverage
 sls deploy
 ```
 
+### Visualizar swagger offline
+
+```
+sls offline start
+```
+
 ### Dependencias
 
 - aws-sdk
