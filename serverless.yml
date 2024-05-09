@@ -10,23 +10,41 @@ provider:
           Action: 'dynamodb:*'
           Resource: arn:aws:dynamodb:us-east-1:565700762908:table/indraTable
 
+package:
+  individually: true
+  patterns:
+    - '!*/**'
+    - '!*.zip'
+    - '!node_modules/**'
+
 functions:
   search:
-    handler: functions/search/handler.search
+    handler: functions/person/search/handler.search
     package:
       patterns:
-        - 'functions/search/handler.js'
+        - 'functions/person/search/handler.js'
+        - '!*.zip'
+        - '!node_modules/**'
+    layers:
+      - arn:aws:lambda:us-east-1:565700762908:layer:indra-dep-layer:3
     events:
       - http:
           path: search
           method: GET
           request:
             parameters:
-              queryString:
+              querystringParameters:
                 search: true
           cors: true
   save:
-    handler: functions/save/handler.save
+    handler: functions/person/save/handler.save
+    package:
+      patterns:
+        - 'functions/person/save/handler.js'
+        - '!*.zip'
+        - '!node_modules/**'
+    layers:
+      - arn:aws:lambda:us-east-1:565700762908:layer:indra-dep-layer:3
     events:
       - http:
           path: person
@@ -36,7 +54,14 @@ functions:
               application/json: ${file(schemas/personSchema.json)}
           cors: true
   getPerson:
-    handler: functions/get/handler.get
+    handler: functions/person/get/handler.get
+    package:
+      patterns:
+        - 'functions/person/get/handler.js'
+        - '!*.zip'
+        - '!node_modules/**'
+    layers:
+      - arn:aws:lambda:us-east-1:565700762908:layer:indra-dep-layer:3
     events:
       - http:
           path: person/{id}
