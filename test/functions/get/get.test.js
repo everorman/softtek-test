@@ -20,8 +20,8 @@ describe('Get function', () => {
       body: JSON.stringify(expectedData)
     };
 
-    const { data } = await save(eventToSave);
-
+    const { statusCode, body } = await save(eventToSave);
+    const { data } = JSON.parse(body);
     const event = {
       pathParameters: { id: JSON.parse(data).pk }
     };

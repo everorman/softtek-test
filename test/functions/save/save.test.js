@@ -19,7 +19,8 @@ describe('Save function', () => {
       body: JSON.stringify(expectedData)
     };
 
-    const { statusCode, data } = await save(event);
+    const { statusCode, body } = await save(event);
+    const { data } = JSON.parse(body);
     expect(statusCode).toBe(200);
     expect(data.nombre).toBe(PERSON_SEARCH.results[0].name);
     expect(data.genero).toBe(PERSON_SEARCH.results[0].gender);
