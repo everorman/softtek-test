@@ -8,7 +8,7 @@ provider:
       statements:
         - Effect: Allow
           Action: 'dynamodb:*'
-          Resource: arn:aws:dynamodb:us-east-1:471893938953:table/indraTable
+          Resource: arn:aws:dynamodb:us-east-1:565700762908:table/indraTable
 
 functions:
   search:
@@ -20,8 +20,30 @@ functions:
       - http:
           path: search
           method: GET
+          request:
+            parameters:
+              queryString:
+                search: true
           cors: true
-
+  save:
+    handler: functions/save/handler.save
+    events:
+      - http:
+          path: person
+          method: POST
+          request:
+            schemas:
+              application/json: ${file(schemas/personSchema.json)}
+  getPerson:
+    handler: functions/get/handler.get
+    events:
+      - http:
+          path: person/{id}
+          method: GET
+          request:
+            parameters:
+              paths:
+                id: true
 resources:
   Resources:
     indraTable:

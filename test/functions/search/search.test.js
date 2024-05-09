@@ -1,5 +1,5 @@
-const { search } = require('../../functions/search/handler');
-const { PERSON_SEARCH } = require('../fixtures/personSearch');
+const { search } = require('../../../functions/search/handler');
+const { PERSON_SEARCH } = require('../../fixtures/personSearch');
 jest.mock('axios', () => ({
   get: jest.fn()
 }));
