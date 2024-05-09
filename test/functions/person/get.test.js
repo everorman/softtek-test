@@ -22,14 +22,14 @@ describe('Get function', () => {
     };
 
     const { statusCode, body } = await save(eventToSave);
-    const { data } = JSON.parse(body);
+    const data = JSON.parse(body);
     const event = {
       pathParameters: { id: data.pk }
     };
 
     const { body: bodyPerson } = await get(event);
-    const { data: person } = JSON.parse(bodyPerson);
-    expect(person.pk).toBe(data.pk);
+    expect(typeof bodyPerson).toBe('string');
+    expect(JSON.parse(bodyPerson).pk).toBe(data.pk);
 
   });
 });

@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const aws = require('aws-sdk');
+const { formatResponse } = require('../../../utils/formatResponse');
 
 
 const isTest = process.env.JEST_WORKER_ID;
@@ -22,11 +23,10 @@ const get = async (event) => {
     },
   };
 
-  const res = await dynamodb.get(params).promise();
-  return {
-    "statusCode": 200,
-    "body": JSON.stringify({ data: res.Item })
-  };
+  const { Item: item } = await dynamodb.get(params).promise();
+  if (!item) return formatResponse(403, { error: "Person not found" });
+  return formatResponse(200, item);
+
 };
 
 module.exports = {

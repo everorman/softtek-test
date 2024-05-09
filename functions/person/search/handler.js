@@ -1,5 +1,6 @@
 'use strict';
 const axios = require('axios');
+const { formatResponse } = require('../../../utils/formatResponse');
 const dataMapping = (data) => {
   const mapping = {
     name: 'nombre',
@@ -23,15 +24,13 @@ const search = async (event, context) => {
   const { search } = event.queryStringParameters;
   const { data, status } = await axios.get(`https://swapi.py4e.com/api/people/?search=${search}`);
 
-  if (status !== 200) return {
-    "statusCode": status
-  };
+  if (status !== 200)
+    return formatResponse(status, { error: 'There is a error with axios' });
+
 
   const result = data.results.map(dataMapping);
-  return {
-    "statusCode": 200,
-    "body": JSON.stringify(result)
-  };
+  return formatResponse(200, result);
+
 };
 
 module.exports = {
