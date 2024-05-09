@@ -9,7 +9,14 @@ provider:
         - Effect: Allow
           Action: 'dynamodb:*'
           Resource: arn:aws:dynamodb:us-east-1:565700762908:table/indraTable
+        - Effect: Allow
+          Action:
+            - 'apigateway:GET'
+          Resource: 'arn:aws:apigateway:us-east-1::/restapis/09lipp79da/stages/dev/exports/swagger'
 
+plugins:
+  - serverless-auto-swagger
+  - serverless-offline
 package:
   individually: true
   patterns:
@@ -76,6 +83,25 @@ functions:
               paths:
                 id: true
           cors: true
+          reponse:
+            200:
+              description: 'success'
+
+  # swagger:
+  #   handler: swagger/index.handler
+  #   package:
+  #     patterns:
+  #       - 'swagger/index.js'
+  #       - '!*.zip'
+  #       - '!node_modules/**'
+  #       - 'utils/*.js'
+  #   layers:
+  #     - !Ref BaseLambdaLayer
+  #   events:
+  #     - http:
+  #         path: api-docs
+  #         method: GET
+  #         cors: true
 layers:
   base:
     name: prd-dependencies
