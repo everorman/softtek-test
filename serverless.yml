@@ -17,6 +17,12 @@ provider:
 plugins:
   - serverless-auto-swagger
   - serverless-offline
+
+custom:
+  autoswagger:
+    basePath: '/dev'
+    title: 'Indra technical test'
+    apiType: 'http'
 package:
   individually: true
   patterns:

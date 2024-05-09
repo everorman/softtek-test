@@ -2,7 +2,7 @@
             module.exports = {
   "swagger": "2.0",
   "info": {
-    "title": "indra-api",
+    "title": "Indra technical test",
     "version": "1"
   },
   "paths": {
@@ -72,5 +72,6 @@
     }
   },
   "definitions": {},
-  "securityDefinitions": {}
+  "securityDefinitions": {},
+  "basePath": "/dev"
 };
