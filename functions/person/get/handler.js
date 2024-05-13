@@ -17,7 +17,7 @@ const dynamodb = new aws.DynamoDB.DocumentClient(config);
 const get = async (event) => {
   let personId = event.pathParameters.id;
   const params = {
-    TableName: 'indraTable',
+    TableName: 'SofttekTable',
     Key: {
       pk: personId,
     },

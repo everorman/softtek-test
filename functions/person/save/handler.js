@@ -18,7 +18,7 @@ const save = async (event, context) => {
   const body = JSON.parse(event.body);
   body.pk = pk;
   var params = {
-    TableName: 'indraTable',
+    TableName: 'SofttekTable',
     Item: body
   };
   const res = await dynamodb.put(params).promise();

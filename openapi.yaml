@@ -1,17 +1,16 @@
 openapi: 3.0.0
 info:
-  description: Prueba tecnica para INDRA
+  description: Prueba tecnica para
   version: 1.0.0
-  title:  Prueba tecnica para INDRA
-
+  title: Prueba tecnica para Softtek
 
 paths:
   /person/search:
     get:
       summary: Realiza búsqueda de persona por nombre
       description: Lista las personas por nombre tomando el StarWars API y traduce los campos al español
-      parameters: 
-        - name: search 
+      parameters:
+        - name: search
           in: query
           description: 'Nombre a buscar'
           schema:
@@ -20,20 +19,20 @@ paths:
         '200':
           description: Operación correcta
           content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/Person'        
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
         '500':
           description: Error de servidor
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'       
-components: 
-  schemas:   
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
     Person:
       type: object
-      required: 
+      required:
         - nombre
         - peso
         - fecha_nacimiento
@@ -50,7 +49,7 @@ components:
           type: number
         genero:
           type: string
-          enum: 
+          enum:
             - male
             - female
         fecha_nacimiento:
@@ -61,5 +60,3 @@ components:
         statusCode:
           description: Código de error
           type: string
-        
-          

@@ -1,7 +1,7 @@
 module.exports = {
   tables: [
     {
-      TableName: `indraTable`,
+      TableName: `SofttekTable`,
       KeySchema: [{ AttributeName: 'pk', KeyType: 'HASH' }],
       AttributeDefinitions: [{ AttributeName: 'pk', AttributeType: 'S' }],
       ProvisionedThroughput: { ReadCapacityUnits: 1, WriteCapacityUnits: 1 },

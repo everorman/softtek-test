@@ -1,4 +1,4 @@
-# Prueba tecnica INDRA
+# Prueba tecnica Softtek
 
 Este proyecto esta desarrollado usando serverless framework, cuenta con un layer con las dependencias `nodejs-layer` este layer esta configurado en el `serverless.yml` y se sube automaticamente al hacer deploy.
 

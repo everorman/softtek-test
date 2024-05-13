@@ -2,7 +2,7 @@
             module.exports = {
   "swagger": "2.0",
   "info": {
-    "title": "Indra technical test",
+    "title": "Softtek technical test",
     "version": "1"
   },
   "paths": {
@@ -17,10 +17,21 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "search",
+            "type": "string",
+            "description": "Nombre a filtrar",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
-            "description": "200 response"
+            "description": "Datos formateados de una persona",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
           }
         }
       }
@@ -36,7 +47,17 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Body required in the request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "200 response"
@@ -71,7 +92,37 @@
       }
     }
   },
-  "definitions": {},
+  "definitions": {
+    "Person": {
+      "properties": {
+        "nombre": {
+          "title": "Person.nombre",
+          "type": "string"
+        },
+        "genero": {
+          "title": "Person.genero",
+          "type": "string"
+        },
+        "peso": {
+          "title": "Person.peso",
+          "type": "string"
+        },
+        "fecha_nacimiento": {
+          "title": "Person.fecha_nacimiento",
+          "type": "string"
+        }
+      },
+      "required": [
+        "nombre",
+        "genero",
+        "peso",
+        "fecha_nacimiento"
+      ],
+      "additionalProperties": false,
+      "title": "Person",
+      "type": "object"
+    }
+  },
   "securityDefinitions": {},
   "basePath": "/dev"
 };

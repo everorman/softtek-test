@@ -1,4 +1,4 @@
-service: indra-api
+service: api
 
 provider:
   name: aws
@@ -8,7 +8,7 @@ provider:
       statements:
         - Effect: Allow
           Action: 'dynamodb:*'
-          Resource: arn:aws:dynamodb:us-east-1:565700762908:table/indraTable
+          Resource: arn:aws:dynamodb:us-east-1:565700762908:table/SofttekTable
         - Effect: Allow
           Action:
             - 'apigateway:GET'
@@ -21,8 +21,9 @@ plugins:
 custom:
   autoswagger:
     basePath: '/dev'
-    title: 'Indra technical test'
+    title: 'Softtek technical test'
     apiType: 'http'
+    typefiles: ['./types/api-types.d.ts']
 package:
   individually: true
   patterns:
@@ -40,7 +41,7 @@ functions:
         - '!*.zip'
         - '!node_modules/**'
     # layers:
-    #   - arn:aws:lambda:us-east-1:565700762908:layer:indra-dep-layer:3
+    #   - arn:aws:lambda:us-east-1:565700762908:layer:Softtek-dep-layer:3
     layers:
       - !Ref BaseLambdaLayer
     events:
@@ -49,8 +50,21 @@ functions:
           method: GET
           request:
             parameters:
-              querystringParameters:
-                search: true
+              queryStringParameters:
+                search:
+                  required: true
+                  type: string
+                  description: 'Nombre a filtrar'
+          responseData:
+            200:
+              description: 'Datos formateados de una persona'
+              bodyType: Person
+          queryStringParameters:
+            search:
+              required: true
+              type: string
+              description: 'Nombre a filtrar'
+
           cors: true
   save:
     handler: functions/person/save/handler.save
@@ -70,6 +84,7 @@ functions:
             schemas:
               application/json: ${file(schemas/personSchema.json)}
           cors: true
+          bodyType: Person
   getPerson:
     handler: functions/person/get/handler.get
     package:
@@ -122,10 +137,10 @@ layers:
 
 resources:
   Resources:
-    indraTable:
+    SofttekTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: indraTable
+        TableName: SofttekTable
         AttributeDefinitions:
           - AttributeName: pk
             AttributeType: S
